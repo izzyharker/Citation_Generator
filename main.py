@@ -36,6 +36,13 @@ def configure_book_url(search_params: dict):
 
 def main():
     # get input
-    input = parse.parseAndValidateInput(sys.argv)
+    input = parse.parseAndValidateInput(sys.argv[1:])
 
+    if (input.keys() == None):
+        print("input is empty")
+    else:
+        print(input)
     # configure url
+
+if (__name__ == "__main__"):
+    main()
