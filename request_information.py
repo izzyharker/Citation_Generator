@@ -9,7 +9,7 @@ def getAPIKey(api_key_filename: str = "APIKey"):
 
     api_key = f.readline()
     f.close()
-    
+
     return api_key
 
 def generateRequest(url_string):
@@ -20,7 +20,10 @@ def generateRequest(url_string):
     
 def configureBookUrl(isbn: str):
     default_url = "https://www.googleapis.com/books/v1/volumes?q=isbn:"
-    api_key = "&key=" + getAPIKey()
+
+    # do i even need an api key???
+    # api_key = "&key=" + getAPIKey()
+    api_key = ""
 
     url_for_isbn_request = default_url + isbn + api_key
 
@@ -28,7 +31,6 @@ def configureBookUrl(isbn: str):
 
 def requestBookInformation(isbn: str) -> requests.Response:
     request_url = configureBookUrl(isbn)
-
     response = generateRequest(request_url)
 
     return response

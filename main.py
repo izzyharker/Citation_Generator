@@ -13,7 +13,6 @@ def main():
     input = parse.parseAndValidateInput(sys.argv[1:])
     book_data = None
 
-    print("ISBN: ", input["ISBN"])
     if (input != {}):
         book_data = req.requestBookInformation(input["ISBN"])
 
