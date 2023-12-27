@@ -10,9 +10,9 @@ def validateISBN(isbn: str):
     if isbn == "":
         valid = False
         errmsg = "No ISBN found"
-    elif len(isbn) != 13:
+    elif len(isbn) != 13 and len(isbn) != 10:
         valid = False
-        errmsg = "ISBN must have 13 digits"
+        errmsg = "ISBN must have 13 or 10 digits"
 
     for digit in isbn:
         try:

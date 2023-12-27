@@ -6,15 +6,18 @@
 
 import sys
 import parse_input as parse
-import request_info as req
+import request_information as req
 
 def main():
     # get input
     input = parse.parseAndValidateInput(sys.argv[1:])
     book_data = None
 
+    print("ISBN: ", input["ISBN"])
     if (input != {}):
         book_data = req.requestBookInformation(input["ISBN"])
+
+    print(book_data.text)
 
 if (__name__ == "__main__"):
     main()

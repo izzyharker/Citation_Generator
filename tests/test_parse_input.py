@@ -83,18 +83,24 @@ class TestParseInput(unittest.TestCase):
 
 
 class TestValidateISBN(unittest.TestCase):
-    def test_valid_ISBN(self):
+    def test_valid_13_ISBN(self):
         input = "9780521825146"
 
         valid, _ = parse.validateISBN(input)
         self.assertTrue(valid)
 
-    def test_short_ISBN(self):
+    def test_valid_10_ISBN(self):
+        input = "0521825148"
+
+        valid, _ = parse.validateISBN(input)
+        self.assertTrue(valid)
+
+    def test_wrong_length(self):
         input = "97805218251"
 
         valid, errmsg = parse.validateISBN(input)
         self.assertFalse(valid)
-        self.assertEqual(errmsg, "ISBN must have 13 digits")
+        self.assertEqual(errmsg, "ISBN must have 13 or 10 digits")
 
     def test_invalid_ISBN(self):
         input = "97805abc25146"
