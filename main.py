@@ -5,8 +5,10 @@
 # 4. (later) use this as backend for a website
 
 import sys
+import os
 import parse_input as parse
 import request_information as req
+import generate_citation as gen
 
 def main():
     # get input
@@ -16,7 +18,15 @@ def main():
     if (input != {}):
         book_data = req.requestBookInformation(input["ISBN"])
 
-    print(book_data.text)
+    temp_file = open(".temp", "w+")
+    temp_file.write(book_data.text)
+    temp_file.close()
+
+    # citation = gen.readAndGenerateCitation(input["Style"])
+
+    # os.remove(".temp")
+    # print(citation)
+    return 0
 
 if (__name__ == "__main__"):
     main()
