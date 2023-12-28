@@ -1,20 +1,27 @@
 import unittest
 import os
 import sys
+import requests
 sys.path.append(os.getcwd())
 
-import request_information as req
+from citation import Citation
 
 class TestConfigureRequest(unittest.TestCase):
     def test_configure_url(self):
-        input = "9780521825146"
-        output_url = req.configureBookUrl(input)
+        input = "-f 9780521825146"
+        cite = Citation()
+        cite.parseAndValidateInput(input)
 
-        self.assertEqual(output_url, "https://www.googleapis.com/books/v1/volumes?q=isbn:9780521825146")
+        cite.configureBookUrl()
+
+        self.assertEqual(cite.request_url, "https://www.googleapis.com/books/v1/volumes?q=isbn:9780521825146")
 
     def test_request(self):
-        isbn = "9780521825146"
+        input = "-f 9780521825146"
 
-        url = req.configureBookUrl(isbn)
-        book_info = req.generateRequest(url)
-        self.assertEqual(book_info.status_code, 200)
+        cite = Citation()
+
+        cite.parseAndValidateInput(input)
+
+        cite.requestBookInformation()
+        self.assertEqual(cite.response.status_code, 200)
