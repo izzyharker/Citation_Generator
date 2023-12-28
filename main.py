@@ -6,26 +6,23 @@
 
 import sys
 import os
-import parse_input as parse
-import request_information as req
-import generate_citation as gen
+from citation import Citation
+from book import Book
+import requests
 
 def main():
     # get input
-    input = parse.parseAndValidateInput(sys.argv[1:])
-    book_data = None
+    input = Citation()
+    valid = input.parseAndValidateInput(sys.argv[1:])
 
-    if (input != {}):
-        book_data = req.requestBookInformation(input["ISBN"])
-
-    temp_file = open(".temp", "w+")
-    temp_file.write(book_data.text)
-    temp_file.close()
+    if valid:
+        input.requestBookInformation()
 
     # citation = gen.readAndGenerateCitation(input["Style"])
 
-    # os.remove(".temp")
+    os.remove(".temp")
     # print(citation)
+    print(input.response.text)
     return 0
 
 if (__name__ == "__main__"):
