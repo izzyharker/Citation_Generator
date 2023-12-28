@@ -1,5 +1,3 @@
 # Citation_Generator
-Generates formatted citations for books
+Python CLI program to generate formatted citations for books from an ISBN.
 
-## API Key
-This program reads an api key from a file called "googleAPI". This should be a file containing only the api key.
