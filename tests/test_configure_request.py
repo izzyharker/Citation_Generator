@@ -4,13 +4,12 @@ import sys
 import requests
 sys.path.append(os.getcwd())
 
-from citation import Citation
+from book_information import BookRequest
 
 class TestConfigureRequest(unittest.TestCase):
     def test_configure_url(self):
         input = "-f 9780521825146"
-        cite = Citation()
-        cite.parseAndValidateInput(input)
+        cite = BookRequest(input)
 
         cite.configureBookUrl()
 
@@ -19,9 +18,7 @@ class TestConfigureRequest(unittest.TestCase):
     def test_request(self):
         input = "-f 9780521825146"
 
-        cite = Citation()
-
-        cite.parseAndValidateInput(input)
+        cite = BookRequest(input)
 
         cite.requestBookInformation()
         self.assertEqual(cite.response.status_code, 200)
