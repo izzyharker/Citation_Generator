@@ -4,26 +4,28 @@
 # 3. generate the citation
 # 4. (later) use this as backend for a website
 
+"""
+python -m unittest discover -v -s tests/ -p 'test_*.py'
+"""
+
 import sys
 import os
+from book_information import BookRequest
 from citation import Citation
-from book import Book
-import requests
 
 def main():
     # get input
-    input = Citation()
-    valid = input.parseAndValidateInput(sys.argv[1:])
+    input = BookRequest(sys.argv[1:])
 
-    if valid:
-        input.requestBookInformation()
+    if input.valid:
+        input.requestAndWriteBookInformation()
 
-    # citation = gen.readAndGenerateCitation(input["Style"])
+    citation = Citation(input.style)
+
+    cited_book = citation.generateCitation()
+    print(cited_book)
 
     os.remove(".temp")
-    # print(citation)
-    print(input.response.text)
-    return 0
 
 if (__name__ == "__main__"):
     main()
